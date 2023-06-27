@@ -16,7 +16,7 @@ public class Main {
             System.out.println("1. Calculate the sum of numbers from 1 to n");
             System.out.println("2. Print all prime numbers from 1 to 1000");
             System.out.println("3. A simple calculator");
-            System.out.println("4. ");
+            System.out.println("4. Math phrase solution");
             System.out.println("Please, select the function:");
             int func = in.nextInt();
             
@@ -31,7 +31,7 @@ public class Main {
                     functions.calculator();
                     break;
                 case 4:
-                    functions.solutionExample("2? + ?5 = 69");
+                    functions.solution("5? + ?9 = 69");
                     break;
             }
         }
