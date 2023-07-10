@@ -1,7 +1,7 @@
 package Seminar4.HW;
 
-import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.LinkedList;
 
 //Даны два Deque, представляющие два целых числа. Цифры хранятся в обратном порядке и каждый из их узлов содержит одну цифру.
 //1) Умножьте два числа и верните произведение в виде связанного списка.
@@ -9,70 +9,53 @@ import java.util.Deque;
 
 public class functions {
 
-    static Deque<Integer> multiply(Deque<Integer> deque1, Deque<Integer> deque2) {
-        int sign1 = deque1.removeLast();
-        int sign2 = deque2.removeLast();
-        int sign = sign1 * sign2 < 0 ? -1 : 1;
-        Deque<Integer> result = new ArrayDeque<>();
+    // multiplication function
+    public static Deque<Integer> multiply(Deque<Integer> deque1, Deque<Integer> deque2) {
 
-        while (!deque1.isEmpty()) {
-            int num1 = deque1.removeLast();
-            Deque<Integer> tempResult = new ArrayDeque<>(result);
-            int carry = 0;
-            result.clear();
+        int number1 = dequeToNumber(deque1);
+        int number2 = dequeToNumber(deque2);
 
-            while (!deque2.isEmpty()) {
-                int num2 = deque2.removeLast();
-                int product = (num1 * num2) + carry;
-                result.addFirst(product % 10);
-                carry = product / 10;
-            }
+        int production = number1 * number2;
 
-            if (carry > 0)
-                result.addFirst(carry);
-
-            int tempCarry = 0;
-
-            while (!tempResult.isEmpty() || carry > 0) {
-                int sum = (tempResult.isEmpty() ? 0 : tempResult.removeFirst()) + carry + tempCarry;
-                result.addFirst(sum % 10);
-                tempCarry = sum / 10;
-            }
-
-            deque2.addAll(tempResult);
-
-            if (!deque1.isEmpty())
-                deque1.removeLast();
-        }
-
-        if (sign == -1)
-            result.addFirst(-1);
-
-        return result;
+        return numberToDeque(production);
     }
 
-    static Deque<Integer> add(Deque<Integer> deque1, Deque<Integer> deque2) {
-        if (deque1.isEmpty() && deque2.isEmpty()) {
-            return new ArrayDeque<>();
+    // addition function
+    public static Deque<Integer> add(Deque<Integer> deque1, Deque<Integer> deque2) {
+
+        int number1 = dequeToNumber(deque1);       
+        int number2 = dequeToNumber(deque2);
+
+        int summary = number1 + number2;
+
+        return numberToDeque(summary);
+    }
+
+    // transformation deq -> num
+    public static int dequeToNumber(Deque<Integer> deque) {
+        int num = 0;
+        int multiplier = 1;
+
+        while (!deque.isEmpty()) 
+        {
+            int digit = deque.removeFirst();
+            num += digit * multiplier;
+            multiplier *= 10;
         }
+        return num;
+    }
 
-        int sign1 = deque1.isEmpty() ? 1 : deque1.removeLast();
-        int sign2 = deque2.isEmpty() ? 1 : deque2.removeLast();
-        int sign = sign1 < 0 && sign2 < 0 ? -1 : 1;
-        Deque<Integer> result = new ArrayDeque<>();
-        int carry = 0;
+    // transformation num -> deq
+    public static Deque<Integer> numberToDeque(int num) {
+        Deque<Integer> deque = new LinkedList<>();
+        int count = String.valueOf(num).length();
 
-        while (!deque1.isEmpty() || !deque2.isEmpty() || carry != 0) {
-            int num1 = deque1.isEmpty() ? 0 : deque1.removeLast();
-            int num2 = deque2.isEmpty() ? 0 : deque2.removeLast();
-            int sum = num1 + num2 + carry;
-            result.addFirst(sum % 10);
-            carry = sum / 10;
+        for (int i = 0; i < count; i++) 
+        {
+            int digit = num % 10;
+            deque.addFirst(digit);
+            num /= 10;
         }
-
-        if (sign == -1)
-            result.addFirst(-1);
-
-        return result;
+        return deque;
     }
 }
