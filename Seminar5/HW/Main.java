@@ -3,63 +3,44 @@ package Seminar5.HW;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 
 // Реализуйте структуру телефонной книги с помощью HashMap.
 // Программа также должна учитывать, что во входной структуре будут повторяющиеся имена с разными телефонами,
 // их необходимо считать, как одного человека с разными телефонами. Вывод должен быть отсортирован по убыванию числа телефонов.
 
-public class Main {
+public class Main{
 
     public static void main(String[] args) throws IOException {
-        // переменная описывает вызываемое действие
-        String act;
-
-        // загрузка БД
-        functions.loadPB();
-        // // вывод записей на экран
-        // functions.printPhonebook();
-
-        // вывод на экран описания возможных действий с указанием команд
+        HashMap<String, String> phonebook = new HashMap<>();
         System.out.println("Please, select an action:");
-        System.out.println(" 1.(add) adding contact\n 2.(remove) removing contact\n 3.(tel) find all telephone numbers belonging to the contact\n 4.(nam) find contact belonging to the telephone\n 5.(save)сохранить\n 6.(print) printing all contacts\n 7.exit\n");
+        System.out.println(" 1.(add) adding contact\n 2.(print) printing all contacts\n 3. exit\n");
 
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        act = bf.readLine();
-        while (!act.equals("exit")||!act.equals("7")) 
+        String action;
+        action = bf.readLine();
+        
+        while (!action.equals("exit")||!action.equals("3")) 
         {
-            if (act.equals("add") || act.equals("1")) {
+            if (action.equals("add") || action.equals("1")) {
                 System.out.println("Enter a name of the contact:");
                 String name = bf.readLine();
                 System.out.println("Enter a phone number:");
                 String phone = bf.readLine();
-                functions.addPB(phone, name);
+                functions.add(phonebook, name, phone);
+                System.out.println("Contact added successfuly!");
             }
-            if (act.equals("remove")|| act.equals("2")) {
-                System.out.println("Enter a name of the contact you want to delete:");
-                String name = bf.readLine();
-                functions.delPB(name);
-            }
-            if (act.equals("nam")|| act.equals("3")) {
-                System.out.println("Enter searched name of the contact:");
-                String surname = bf.readLine();
-                String[] numbers = functions.FindNumberPhone(surname);
-                for (String number : numbers) {
-                    System.out.println(number);
+            if (action.equals("print")|| action.equals("2")) 
+            {
+                if (phonebook.isEmpty()) System.out.println("The phonebook is empty.\n"); 
+                else 
+                {
+                    System.out.println("Contacts in phonebook: ");
+                    functions.print(phonebook);
                 }
-            }
-            if (act.equals("tel")|| act.equals("4")) {
-                System.out.println("Enter searched phone number of the contact:");
-                String number = bf.readLine();
-                System.out.println(functions.FindSurname(number));
-            }
-            if (act.equals("save")|| act.equals("5")) {
-                functions.savePB();
-            }
-            if (act.equals("print")|| act.equals("6")) {
-                functions.printPhonebook();
             }            
-            System.out.println(" 1.(add) adding contact\n 2.(rem) removing contact\n 3.(tel) find all telephone numbers belonging to the contact\n 4.(nam) find contact belonging to the telephone\n 5.(save)сохранить\n 6.(print) printing all contacts\n 7.exit\n");
-            act = bf.readLine();
+            System.out.println(" 1.(add) adding contact\n 2.(print) printing all contacts\n 3. exit\n");
+            action = bf.readLine();
         }
-    }
-}
+    }       
+}            
