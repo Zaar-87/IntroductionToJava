@@ -9,17 +9,17 @@ import java.util.logging.SimpleFormatter;
 
 public class Main {
     public static void main(String[] args) throws SecurityException, IOException {
-        //System.out.println(stringCompress("aaabbbcdd"));
-        //System.out.println(isPalindrome("abceba"));
+        System.out.println(stringCompress("aaabbbcdd"));
+        System.out.println(isPalindrome("abceba"));
 
-        // String pathProject = System.getProperty("user.dir");
-        // String pathFile = pathProject.concat("\\Seminar2-1.txt");
-        // addingToFile(pathFile, fWrtr("Hello!", 5));
-        
         String pathProject = System.getProperty("user.dir");
-        String pathFile1 = pathProject.concat("\\Seminar2-1.txt");
-        String pathFile2 = pathProject.concat("\\Seminar2-2.txt");
-        addListToFile(pathFile2, showCurrentFiles(pathProject));
+        String pathFile = pathProject.concat("\\Seminar2-1.txt");
+        addingToFile(pathFile, fWrtr("Hello!", 5));
+        
+        // String pathProject = System.getProperty("user.dir");
+        // String pathFile1 = pathProject.concat("\\Seminar2-1.txt");
+        // String pathFile2 = pathProject.concat("\\Seminar2-2.txt");
+        // addListToFile(pathFile2, showCurrentFiles(pathProject));
     }
 
     static String longStringBuilder(int n, char c1, char c2) {

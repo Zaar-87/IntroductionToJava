@@ -11,9 +11,9 @@ public class functions {
 
     public static void print(HashMap<String, String> phonebook) 
     {
-        ArrayList<Map.Entry<String, String>> list = new ArrayList<>(phonebook.entrySet());
+        ArrayList<Map.Entry<String, String>> contacts = new ArrayList<>(phonebook.entrySet());
 
-        list.sort((object1, object2) -> object2.getValue().length() - object1.getValue().length());
-        for (Map.Entry<String, String> entry : list) System.out.println(entry.getKey() + ": " + entry.getValue());
+        contacts.sort((object1, object2) -> object2.getValue().length() - object1.getValue().length());
+        for (Map.Entry<String, String> entry : contacts) System.out.println("Name - " + entry.getKey() + ": " + entry.getValue());
     }
 }

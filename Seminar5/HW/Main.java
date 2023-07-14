@@ -20,7 +20,7 @@ public class Main{
         String action;
         action = bf.readLine();
         
-        while (!action.equals("exit")||!action.equals("3")) 
+        while (!action.equals("3"))
         {
             if (action.equals("add") || action.equals("1")) {
                 System.out.println("Enter a name of the contact:");
