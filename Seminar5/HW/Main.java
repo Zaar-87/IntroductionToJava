@@ -14,13 +14,13 @@ public class Main{
     public static void main(String[] args) throws IOException {
         HashMap<String, String> phonebook = new HashMap<>();
         System.out.println("Please, select an action:");
-        System.out.println(" 1.(add) adding contact\n 2.(print) printing all contacts\n 3. exit\n");
+        System.out.println(" 1.(add) adding contact\n 2.(rem) removing contact\n 3.(print) printing all contacts\n 4. exit\n");
 
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         String action;
         action = bf.readLine();
         
-        while (!action.equals("3"))
+        while (!action.equals("4"))
         {
             if (action.equals("add") || action.equals("1")) {
                 System.out.println("Enter a name of the contact:");
@@ -30,7 +30,12 @@ public class Main{
                 functions.add(phonebook, name, phone);
                 System.out.println("Contact added successfuly!");
             }
-            if (action.equals("print")|| action.equals("2")) 
+            if (action.equals("rem")|| action.equals("2")) {
+                System.out.println("Enter a name of the contact you want to delete:");
+                String name = bf.readLine();
+                functions.remContact(phonebook, name);
+            }               
+            if (action.equals("print")|| action.equals("3")) 
             {
                 if (phonebook.isEmpty()) System.out.println("The phonebook is empty.\n"); 
                 else 
@@ -39,7 +44,7 @@ public class Main{
                     functions.print(phonebook);
                 }
             }            
-            System.out.println(" 1.(add) adding contact\n 2.(print) printing all contacts\n 3. exit\n");
+            System.out.println(" 1.(add) adding contact\n 2.(rem) removing contact\n 3.(print) printing all contacts\n 4. exit\n");
             action = bf.readLine();
         }
     }       

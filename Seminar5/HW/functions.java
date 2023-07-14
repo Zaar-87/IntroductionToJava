@@ -9,6 +9,10 @@ public class functions {
         phonebook.merge(name, phone, (number1, number2) -> number1 + ", " + number2);
     }
 
+    public static void remContact(HashMap<String, String> phonebook, String name) {
+        phonebook.remove(name);
+    }
+
     public static void print(HashMap<String, String> phonebook) 
     {
         ArrayList<Map.Entry<String, String>> contacts = new ArrayList<>(phonebook.entrySet());
